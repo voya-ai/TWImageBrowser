@@ -30,7 +30,7 @@ open class TWImageBrowserController: UIViewController {
     }
     
 
-    func handleGesture(sender: UIPanGestureRecognizer) {
+    @objc func handleGesture(sender: UIPanGestureRecognizer) {
         let percentThreshold: CGFloat = threshold
         
         // convert y-position to downward pull progress (percentage)

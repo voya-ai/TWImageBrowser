@@ -231,11 +231,11 @@ class TWImageView: UIScrollView {
 
 // MARK: - GestureRecognizer
 extension TWImageView {
-    func scrollViewDidSingleTapped(_ recognizer: UITapGestureRecognizer) {
+    @objc func scrollViewDidSingleTapped(_ recognizer: UITapGestureRecognizer) {
         imageDelegate?.singleTapGesture(self)
     }
     
-    func scrollViewDidDoubleTapped(_ recognizer: UITapGestureRecognizer) {
+    @objc func scrollViewDidDoubleTapped(_ recognizer: UITapGestureRecognizer) {
         if self.zoomScale > self.minimumZoomScale {
             self.setZoomScale(self.minimumZoomScale, animated: true)
         } else if (self.zoomScale < self.maximumZoomScale) {

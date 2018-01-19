@@ -296,7 +296,7 @@ open class TWImageBrowser: UIView {
     }
     
     
-    func autoScrollingView() {
+    @objc func autoScrollingView() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: autoScrollFunctionName , object: nil)
         
         nextPage()
@@ -314,7 +314,7 @@ extension TWImageBrowser {
             object: nil)
     }
     
-    public func orientationDidChangeNotification()
+    @objc public func orientationDidChangeNotification()
     {
         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width * CGFloat(self.imageObjects.count), height: self.scrollView.frame.height)
         
