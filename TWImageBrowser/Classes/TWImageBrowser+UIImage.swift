@@ -40,7 +40,7 @@ extension UIImage {
         self.rawData = rawData
     }
     
-    open class func loadFoo() {
+    open class func awake() {
         let justAOneTimeThing: () = {
             let originalSelector = #selector(UIImage.init(data:))
             let swizzledSelector = #selector(UIImage.init(rawData:))
@@ -74,5 +74,17 @@ extension UIImage {
         }
         
         return imageSize
+    }
+}
+
+extension UIApplication {
+    
+    private static let runOnce: Void = {
+        UIImage.awake()
+    }()
+    
+    override open var next: UIResponder? {
+        UIApplication.runOnce
+        return super.next
     }
 }
