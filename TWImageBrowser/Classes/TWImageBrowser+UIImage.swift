@@ -45,21 +45,21 @@ extension UIImage {
             let originalSelector = #selector(UIImage.init(data:))
             let swizzledSelector = #selector(UIImage.init(rawData:))
             
-            let originalMethod = class_getInstanceMethod(self, originalSelector)
-            let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
+            if let originalMethod = class_getInstanceMethod(self, originalSelector) {
+                if let swizzledMethod = class_getInstanceMethod(self, swizzledSelector) {
             
-            let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod!), method_getTypeEncoding(swizzledMethod!))
-            if didAddMethod {
-                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod!), method_getTypeEncoding(originalMethod!))
-            } else {
-                method_exchangeImplementations(originalMethod!, swizzledMethod!)
+                    let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+                    if didAddMethod {
+                        class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
+                    } else {
+                        method_exchangeImplementations(originalMethod, swizzledMethod)
+                    }
+                }
             }
         }()
         
         justAOneTimeThing
     }
-    
-
     
     func sizeThatFits(_ size: CGSize) -> CGSize {
         var imageSize = CGSize(width: self.size.width / self.scale, height: self.size.height / self.scale)
