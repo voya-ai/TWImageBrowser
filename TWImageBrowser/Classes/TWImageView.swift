@@ -19,7 +19,7 @@ class TWImageView: UIScrollView {
     
     var containerView : UIView!
     var imageView : FLAnimatedImageView!
-    var imageContentMode: UIViewContentMode = .scaleAspectFit
+    var imageContentMode: UIView.ContentMode = .scaleAspectFit
     
     var indicator: UIActivityIndicatorView!
     var minSize: CGSize = CGSize.zero
@@ -83,7 +83,7 @@ class TWImageView: UIScrollView {
         // indicator view
         indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         indicator.center = self.containerView.center
-        indicator.activityIndicatorViewStyle = .white
+        indicator.style = .white
         indicator.hidesWhenStopped = true
         containerView.addSubview(indicator)
         
@@ -225,7 +225,7 @@ class TWImageView: UIScrollView {
         top -= frame.origin.y;
         left -= frame.origin.x;
         
-        self.contentInset = UIEdgeInsetsMake(top, left, top, left);
+        self.contentInset = UIEdgeInsets(top: top, left: left, bottom: top, right: left);
     }
 }
 

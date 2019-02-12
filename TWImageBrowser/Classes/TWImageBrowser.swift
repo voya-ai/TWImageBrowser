@@ -99,7 +99,7 @@ open class TWImageBrowser: UIView {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
         
         imageObjects.removeAll()
         scrollView?.removeFromSuperview()
@@ -310,7 +310,7 @@ extension TWImageBrowser {
     func initializeNotification() {
         NotificationCenter.default.addObserver(
             self, selector: #selector(TWImageBrowser.orientationDidChangeNotification),
-            name: NSNotification.Name.UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil)
     }
     
